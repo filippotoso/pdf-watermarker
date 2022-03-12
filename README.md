@@ -3,8 +3,8 @@ PDFWatermarker enables you to add a text or an image as a watermark to existing 
 
 Using it, you can:
 
-* Use a text and TTF to create a watermark
-* Use jpg and png ( with alpha channels ) files with a 96 DPI resolution as a watermark
+* Use a text and TTF font to create a watermark
+* Use a jpg and png ( with alpha channels ) images with a 96 DPI resolution as a watermark
 * Easily position the watermark on the pages of the PDF file
 
 ## Installation
@@ -26,7 +26,7 @@ use FilippoToso\PdfWatermarker\Support\ImageWatermark;
 use FilippoToso\PdfWatermarker\PdfWatermarker;
 
 // Specify path to the existing pdf
-$pdf = new Pdf('my.pdf');
+$pdf = new Pdf('input.pdf');
 
 // Specify path to image. The image must have a 96 DPI resolution.
 $watermark = new Watermark('watermark.png'); 

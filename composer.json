@@ -8,7 +8,9 @@
     }],
     "require": {
         "php": ">=7.1.0",
-        "setasign/fpdi-fpdf": "^2.2"
+        "illuminate/support": ">=7.0",
+        "setasign/fpdi": "^2.3",
+        "setasign/fpdf": "^1.8"
     },
     "autoload": {
         "psr-4": {
