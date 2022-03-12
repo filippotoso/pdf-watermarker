@@ -1,0 +1,26 @@
+{
+    "name": "filippo-toso/pdf-watermarker",
+    "description": "Simple PDF Watermarker with Laravel support",
+    "license": "MIT",
+    "authors": [{
+        "name": "Filippo Toso",
+        "email": "filippo.toso@creativepark.it"
+    }],
+    "require": {
+        "php": ">=7.1.0",
+        "setasign/fpdi-fpdf": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "FilippoToso\\PdfWatermarker\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "aliases": {
+                "PdfWatermark": "FilippoToso\\PdfWatermarker\\Facades\\PdfWatermarker",
+                "ImageWatermark": "FilippoToso\\PdfWatermarker\\Facades\\ImageWatermarker"
+            }
+        }
+    }
+}
