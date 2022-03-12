@@ -8,6 +8,8 @@ class TextWatermark implements Watermark
 {
     public const COLOR_PATTERN = '/#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})?/si';
 
+    protected const PADDING = 5; // In pixels
+
     protected $height;
     protected $width;
     protected $tmpFile;
@@ -59,11 +61,12 @@ class TextWatermark implements Watermark
         $minY = min([$rect[1], $rect[3], $rect[5], $rect[7]]);
         $maxY = max([$rect[1], $rect[3], $rect[5], $rect[7]]);
 
+        // Add  px of padding to avoid cropping
         return [
-            'left'   => abs($minX) - 1, // -1 is empiric
-            'top'    => abs($minY),
-            'width'  => $maxX - $minX + 1, // +1 is empiric
-            'height' => $maxY - $minY,
+            'left'   => abs($minX) + static::PADDING,
+            'top'    => abs($minY) + static::PADDING,
+            'width'  => $maxX - $minX + static::PADDING * 2,
+            'height' => $maxY - $minY + static::PADDING * 2,
             'box'    => $rect
         ];
     }
