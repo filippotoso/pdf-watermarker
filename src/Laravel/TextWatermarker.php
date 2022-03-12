@@ -22,7 +22,7 @@ class TextWatermarker extends BaseWatermarketer
      * Set the wtaermark text
      *
      * @param string $text
-     * @return void
+     * @return ImageWatermarker
      */
     public function text($text)
     {
@@ -34,7 +34,7 @@ class TextWatermarker extends BaseWatermarketer
      * Set the TTF font path 
      *
      * @param string $font
-     * @return void
+     * @return ImageWatermarker
      */
     public function font($font)
     {
@@ -46,7 +46,7 @@ class TextWatermarker extends BaseWatermarketer
      * Set the font size
      *
      * @param float $size
-     * @return void
+     * @return ImageWatermarker
      */
     public function size($size)
     {
@@ -58,7 +58,7 @@ class TextWatermarker extends BaseWatermarketer
      * Set the text angle
      *
      * @param float $angle
-     * @return void
+     * @return ImageWatermarker
      */
     public function angle($angle)
     {
@@ -70,7 +70,7 @@ class TextWatermarker extends BaseWatermarketer
      * Set the text color in #RRGGBBAA format
      *
      * @param string $color
-     * @return void
+     * @return ImageWatermarker
      */
     public function color($color)
     {

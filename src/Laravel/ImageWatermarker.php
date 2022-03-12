@@ -16,7 +16,7 @@ class ImageWatermarker extends BaseWatermarketer
      * Set the watermark image
      *
      * @param string $filename
-     * @return void
+     * @return ImageWatermarker
      */
     public function watermark($filename)
     {

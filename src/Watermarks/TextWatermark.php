@@ -60,9 +60,9 @@ class TextWatermark implements Watermark
         $maxY = max([$rect[1], $rect[3], $rect[5], $rect[7]]);
 
         return [
-            'left'   => abs($minX) - 1,
-            'top'    => abs($minY) - 1,
-            'width'  => $maxX - $minX,
+            'left'   => abs($minX) - 1, // -1 is empiric
+            'top'    => abs($minY),
+            'width'  => $maxX - $minX + 1, // +1 is empiric
             'height' => $maxY - $minY,
             'box'    => $rect
         ];

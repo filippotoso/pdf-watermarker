@@ -22,7 +22,7 @@ abstract class BaseWatermarketer
      * Set the input PDF
      *
      * @param string $filename
-     * @return void
+     * @return BaseWatermarketer
      */
     public function input($filename)
     {
@@ -34,7 +34,7 @@ abstract class BaseWatermarketer
      * Set the output PDF (used by save())
      *
      * @param string $filename
-     * @return void
+     * @return BaseWatermarketer
      */
     public function output($filename)
     {
@@ -48,7 +48,7 @@ abstract class BaseWatermarketer
      * @param string $position
      * @param integer $offsetX
      * @param integer $offsetY
-     * @return void
+     * @return BaseWatermarketer
      *
      * @see \FilippoToso\PdfWatermarker\Support\Position
      */
@@ -60,6 +60,8 @@ abstract class BaseWatermarketer
 
     /**
      * Specify if the watermark has to be inserted in the background
+     *
+     * @return BaseWatermarketer
      */
     public function asBackground()
     {
@@ -69,6 +71,8 @@ abstract class BaseWatermarketer
 
     /**
      * Specify if the watermark has to be inserted as an overlay
+     *
+     * @return BaseWatermarketer
      */
     public function asOverlay()
     {
@@ -81,7 +85,7 @@ abstract class BaseWatermarketer
      *
      * @param int $fromPage
      * @param int $toPage
-     * @return void
+     * @return BaseWatermarketer
      */
     public function pageRange($fromPage, $toPage = null)
     {
@@ -94,7 +98,7 @@ abstract class BaseWatermarketer
      * Save the watermarked PDF in the path specified with the output() method or in the optional $output parameter
      *
      * @param string $output
-     * @return void
+     * @return BaseWatermarketer
      */
     public function save($output = null)
     {
