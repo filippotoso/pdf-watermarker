@@ -135,8 +135,8 @@ return ImageWatermarker::input('input.pdf')
 
 This package is based on the following repositories:
 
-https://github.com/drinksandco/pdf-watermarker 
-https://github.com/jeroenvdgulik/pdf-watermarker 
-https://github.com/binarystash/pdf-watermarker 
+- https://github.com/drinksandco/pdf-watermarker 
+- https://github.com/jeroenvdgulik/pdf-watermarker
+- https://github.com/binarystash/pdf-watermarker 
 
 I decided to refactor and enhance it because those packages haven't been updated in years.
