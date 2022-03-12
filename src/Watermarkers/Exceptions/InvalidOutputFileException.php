@@ -1,6 +1,6 @@
 <?php
 
-namespace FilippoToso\PdfWatermarker\Laravel\Exceptions;
+namespace FilippoToso\PdfWatermarker\Watermarkers\Exceptions;
 
 use Exception;
 

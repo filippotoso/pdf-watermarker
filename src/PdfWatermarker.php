@@ -218,7 +218,7 @@ class PdfWatermarker implements Watermarker
      * @param string $fileName
      * @return void
      */
-    public function output($fileName = 'document.pdf')
+    public function stream($fileName = 'document.pdf')
     {
         $this->process();
         $this->fpdi->Output($fileName, 'I');

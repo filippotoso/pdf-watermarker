@@ -1,9 +1,9 @@
 <?php
 
-namespace FilippoToso\PdfWatermarker\Laravel;
+namespace FilippoToso\PdfWatermarker\Watermarkers;
 
 use FilippoToso\PdfWatermarker\PdfWatermarker as Watermarker;
-use FilippoToso\PdfWatermarker\Laravel\Exceptions\InvalidOutputFileException;
+use FilippoToso\PdfWatermarker\Watermarkers\Exceptions\InvalidOutputFileException;
 use FilippoToso\PdfWatermarker\Support\Position;
 
 abstract class BaseWatermarketer
@@ -119,7 +119,7 @@ abstract class BaseWatermarketer
      * Return a Laravel response to stream the watermarked PDF
      *
      * @param string $filename
-     * @return void
+     * @return Illuminate\Http\Response|BaseWatermarketer
      */
     public function stream($filename = null)
     {
@@ -130,7 +130,7 @@ abstract class BaseWatermarketer
      * Return a Laravel response to download the watermarked PDF
      *
      * @param string $filename
-     * @return void
+     * @return Illuminate\Http\Response|BaseWatermarketer
      */
     public function download($filename = null)
     {
@@ -149,13 +149,22 @@ abstract class BaseWatermarketer
 
         $watermarker = $this->watermarker();
 
-        return response()->streamDownload(function () use ($watermarker, $filename) {
-            echo ($watermarker->string());
-        }, $filename, [
-            'Content-Type' => $inline ? 'application/pdf' : 'application/octet-stream',
-            'Cache-Control' => 'private, max-age=0, must-revalidate',
-            'Pragma' => 'public',
-        ], $inline ? 'inline' : 'attachment');
+        if (class_exists(Illuminate\Http\Response::class)) {
+            return response()->streamDownload(function () use ($watermarker, $filename) {
+                echo ($watermarker->string());
+            }, $filename, [
+                'Content-Type' => $inline ? 'application/pdf' : 'application/octet-stream',
+                'Cache-Control' => 'private, max-age=0, must-revalidate',
+                'Pragma' => 'public',
+            ], $inline ? 'inline' : 'attachment');
+        } else {
+            if ($inline) {
+                $watermarker->stream($filename);
+            } else {
+                $watermarker->download($filename);
+            }
+            return $this;
+        }
     }
 
     protected abstract function watermarker(): Watermarker;

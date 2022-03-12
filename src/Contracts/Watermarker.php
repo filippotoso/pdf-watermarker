@@ -53,10 +53,18 @@ interface Watermarker
     public function download($file);
 
     /**
-     * Send the PDF to th standard.
+     * Streams the PDF contents to the browser.
      *
      * @param $file
      * @return void
      */
-    public function output($file);
+    public function stream($file);
+
+    /**
+     * Return the PDF content as a string.
+     *
+     * @param $file
+     * @return void
+     */
+    public function string($fileName);
 }

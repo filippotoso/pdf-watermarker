@@ -1,9 +1,9 @@
 <?php
 
-namespace FilippoToso\PdfWatermarker\Laravel;
+namespace FilippoToso\PdfWatermarker\Watermarkers;
 
-use FilippoToso\PdfWatermarker\Laravel\Exceptions\InvalidInputFileException;
-use FilippoToso\PdfWatermarker\Laravel\Exceptions\InvalidWatermarkFileException;
+use FilippoToso\PdfWatermarker\Watermarkers\Exceptions\InvalidInputFileException;
+use FilippoToso\PdfWatermarker\Watermarkers\Exceptions\InvalidWatermarkFileException;
 use FilippoToso\PdfWatermarker\PdfWatermarker as Watermarker;
 use FilippoToso\PdfWatermarker\Watermarks\ImageWatermark;
 use FilippoToso\PdfWatermarker\Support\Pdf;

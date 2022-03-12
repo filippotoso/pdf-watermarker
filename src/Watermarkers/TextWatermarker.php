@@ -1,10 +1,10 @@
 <?php
 
-namespace FilippoToso\PdfWatermarker\Laravel;
+namespace FilippoToso\PdfWatermarker\Watermarkers;
 
-use FilippoToso\PdfWatermarker\Laravel\Exceptions\InvalidColorException;
-use FilippoToso\PdfWatermarker\Laravel\Exceptions\InvalidFontFileException;
-use FilippoToso\PdfWatermarker\Laravel\Exceptions\InvalidInputFileException;
+use FilippoToso\PdfWatermarker\Watermarkers\Exceptions\InvalidColorException;
+use FilippoToso\PdfWatermarker\Watermarkers\Exceptions\InvalidFontFileException;
+use FilippoToso\PdfWatermarker\Watermarkers\Exceptions\InvalidInputFileException;
 use FilippoToso\PdfWatermarker\Watermarks\TextWatermark;
 use FilippoToso\PdfWatermarker\PdfWatermarker as Watermarker;
 use FilippoToso\PdfWatermarker\Support\Pdf;
