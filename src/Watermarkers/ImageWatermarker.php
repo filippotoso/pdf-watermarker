@@ -38,7 +38,7 @@ class ImageWatermarker extends BaseWatermarketer
 
         $watermark = new ImageWatermark($this->watermark);
 
-        $watermarker = new Watermarker($pdf, $watermark);
+        $watermarker = new Watermarker($pdf, $watermark, $this->resolution);
 
         if ($this->position) {
             $watermarker->setPosition($this->position);

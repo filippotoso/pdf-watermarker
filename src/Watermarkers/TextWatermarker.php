@@ -96,7 +96,7 @@ class TextWatermarker extends BaseWatermarketer
 
         $watermark = new TextWatermark($this->text, $this->font, $this->size, $this->angle, $this->color);
 
-        $watermarker = new Watermarker($pdf, $watermark);
+        $watermarker = new Watermarker($pdf, $watermark, $this->resolution);
 
         if ($this->position) {
             $watermarker->setPosition($this->position);

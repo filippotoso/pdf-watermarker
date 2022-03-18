@@ -17,6 +17,7 @@ abstract class BaseWatermarketer
     protected $asOverlay = false;
     protected $pageRangeFrom = 1;
     protected $pageRangeTo = null;
+    protected $resolution = null;
 
     /**
      * Set the input PDF
@@ -55,6 +56,18 @@ abstract class BaseWatermarketer
     public function position($position, $offsetX = 0, $offsetY = 0)
     {
         $this->position = new Position($position, $offsetX, $offsetY);
+        return $this;
+    }
+
+    /**
+     * Set the image resolution
+     *
+     * @param int $resolution
+     * @return BaseWatermarketer
+     */
+    public function resolution($resolution)
+    {
+        $this->resolution = $resolution;
         return $this;
     }
 

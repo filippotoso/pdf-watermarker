@@ -91,6 +91,7 @@ ImageWatermarker::input('input.pdf')
     ->position(Position::BOTTOM_CENTER, -50, -10)
     ->asBackground()
     ->pageRange(3, 4)
+    ->resolution(300) // 300 dpi
     ->save();
 ```
 
@@ -108,6 +109,7 @@ TextWatermarker::input('input.pdf')
     ->font('arial.ttf')
     ->size('25')
     ->color('#CC00007F')
+    ->resolution(300) // 300 dpi
     ->save();
 ```
 

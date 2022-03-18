@@ -10,20 +10,25 @@ use FilippoToso\PdfWatermarker\Support\Position;
 
 class PdfWatermarker implements Watermarker
 {
+    protected const DEFAULT_RESOLUTION = 96;
+
     protected $watermark;
     protected $totalPages;
     protected $specificPages = [];
     protected $position;
     protected $asBackground = false;
+    protected $resolution = self::DEFAULT_RESOLUTION;
+
     /** @var Fpdi */
     protected $fpdi;
 
-    public function __construct(Pdf $file, Watermark $watermark)
+    public function __construct(Pdf $file, Watermark $watermark, $resolution = self::DEFAULT_RESOLUTION)
     {
         $this->fpdi = new Fpdi();
         $this->totalPages = $this->fpdi->setSourceFile($file->getRealPath());
         $this->watermark = $watermark;
         $this->position = new Position(Position::MIDDLE_CENTER);
+        $this->resolution = $resolution;
     }
 
     /**
@@ -113,8 +118,8 @@ class PdfWatermarker implements Watermarker
         $templateId = $this->fpdi->importPage($pageNumber);
         $templateDimension = $this->fpdi->getTemplateSize($templateId);
 
-        $wWidth = ($this->watermark->getWidth() / 96) * 25.4; //in mm
-        $wHeight = ($this->watermark->getHeight() / 96) * 25.4; //in mm
+        $wWidth = ($this->watermark->getWidth() / $this->resolution) * 25.4; //in mm
+        $wHeight = ($this->watermark->getHeight() / $this->resolution) * 25.4; //in mm
 
         $watermarkCoords = $this->calculateWatermarkCoordinates(
             $wWidth,
@@ -125,11 +130,11 @@ class PdfWatermarker implements Watermarker
 
         if ($watermark_visible) {
             if ($this->asBackground) {
-                $this->fpdi->Image($this->watermark->getFilePath(), $watermarkCoords[0], $watermarkCoords[1], -96);
+                $this->fpdi->Image($this->watermark->getFilePath(), $watermarkCoords[0], $watermarkCoords[1], -$this->resolution);
                 $this->fpdi->useTemplate($templateId);
             } else {
                 $this->fpdi->useTemplate($templateId);
-                $this->fpdi->Image($this->watermark->getFilePath(), $watermarkCoords[0], $watermarkCoords[1], -96);
+                $this->fpdi->Image($this->watermark->getFilePath(), $watermarkCoords[0], $watermarkCoords[1], -$this->resolution);
             }
         } else {
             $this->fpdi->useTemplate($templateId);
