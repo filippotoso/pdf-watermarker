@@ -17,12 +17,13 @@ class TextWatermarker extends BaseWatermarketer
     protected $size = 10;
     protected $angle = 0;
     protected $color = '#00000000';
+    protected $opacity = 1;
 
     /**
      * Set the wtaermark text
      *
      * @param string $text
-     * @return ImageWatermarker
+     * @return TextWatermarker
      */
     public function text($text)
     {
@@ -31,10 +32,10 @@ class TextWatermarker extends BaseWatermarketer
     }
 
     /**
-     * Set the TTF font path 
+     * Set the TTF font path
      *
      * @param string $font
-     * @return ImageWatermarker
+     * @return TextWatermarker
      */
     public function font($font)
     {
@@ -46,7 +47,7 @@ class TextWatermarker extends BaseWatermarketer
      * Set the font size
      *
      * @param float $size
-     * @return ImageWatermarker
+     * @return TextWatermarker
      */
     public function size($size)
     {
@@ -58,7 +59,7 @@ class TextWatermarker extends BaseWatermarketer
      * Set the text angle
      *
      * @param float $angle
-     * @return ImageWatermarker
+     * @return TextWatermarker
      */
     public function angle($angle)
     {
@@ -70,11 +71,23 @@ class TextWatermarker extends BaseWatermarketer
      * Set the text color in #RRGGBBAA format
      *
      * @param string $color
-     * @return ImageWatermarker
+     * @return TextWatermarker
      */
     public function color($color)
     {
         $this->color = $color;
+        return $this;
+    }
+
+    /**
+     * Set the text opacity
+     *
+     * @param $opacity
+     * @return $this
+     */
+    public function opacity($opacity)
+    {
+        $this->opacity = $opacity;
         return $this;
     }
 
@@ -94,7 +107,7 @@ class TextWatermarker extends BaseWatermarketer
 
         $pdf = new Pdf($this->input);
 
-        $watermark = new TextWatermark($this->text, $this->font, $this->size, $this->angle, $this->color);
+        $watermark = new TextWatermark($this->text, $this->font, $this->size, $this->angle, $this->color, $this->opacity);
 
         $watermarker = new Watermarker($pdf, $watermark, $this->resolution);
 
