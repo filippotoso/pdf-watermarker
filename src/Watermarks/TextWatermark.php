@@ -17,13 +17,13 @@ class TextWatermark implements Watermark
     /**
      * Create a text watermark
      *
-     * @param string $text The text that will be rendered 
+     * @param string $text The text that will be rendered
      * @param string $font The path of the TTF font file
      * @param integer $size The font size
      * @param integer $angle The angle of the text
      * @param string $color The color of the text in #RRGGBBAA (Red, Green, Blue and Alpha). For instance #FF00007F (Red with 50% opacity)
      */
-    public function __construct($text, $font = null, $size = 10, $angle = 0, $color = '#00000000')
+    public function __construct($text, $font = null, $size = 10, $angle = 0, $color = '#00000000', $opacity = 1)
     {
         $this->tmpFile = sys_get_temp_dir() . '/' . uniqid() . '.png';
 
@@ -47,7 +47,7 @@ class TextWatermark implements Watermark
 
         $black = imagecolorallocatealpha($image, $colorArray['red'], $colorArray['green'], $colorArray['blue'], $colorArray['alpha']);
         imagettftext($image, $size, $angle, $textBox['left'], $textBox['top'], $black, $font, $text);
-
+        imagefilter($image, IMG_FILTER_COLORIZE, 0, 0, 0, 127 * $opacity);
         imagepng($image, $this->tmpFile);
 
         imagedestroy($image);
@@ -63,11 +63,11 @@ class TextWatermark implements Watermark
 
         // Add  px of padding to avoid cropping
         return [
-            'left'   => abs($minX) + static::PADDING,
-            'top'    => abs($minY) + static::PADDING,
-            'width'  => $maxX - $minX + static::PADDING * 2,
+            'left' => abs($minX) + static::PADDING,
+            'top' => abs($minY) + static::PADDING,
+            'width' => $maxX - $minX + static::PADDING * 2,
             'height' => $maxY - $minY + static::PADDING * 2,
-            'box'    => $rect
+            'box' => $rect
         ];
     }
 
