@@ -22,14 +22,14 @@ In vanilla PHP you can watermark a PDF with an image in this way:
 <?php
 
 use FilippoToso\PdfWatermarker\Support\Pdf;
-use FilippoToso\PdfWatermarker\Support\ImageWatermark;
+use FilippoToso\PdfWatermarker\Watermarks\ImageWatermark;
 use FilippoToso\PdfWatermarker\PdfWatermarker;
 
 // Specify path to the existing pdf
 $pdf = new Pdf('input.pdf');
 
 // Specify path to image. The image must have a 96 DPI resolution.
-$watermark = new Watermark('watermark.png'); 
+$watermark = new ImageWatermark('watermark.png'); 
 
 // Create a new watermarker
 $watermarker = new PDFWatermarker($pdf, $watermark); 
