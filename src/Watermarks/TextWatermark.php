@@ -23,7 +23,7 @@ class TextWatermark implements Watermark
      * @param integer $angle The angle of the text
      * @param string $color The color of the text in #RRGGBBAA (Red, Green, Blue and Alpha). For instance #FF00007F (Red with 50% opacity)
      */
-    public function __construct($text, $font = null, $size = 10, $angle = 0, $color = '#00000000', $opacity = 1)
+    public function __construct($text, $font = null, $size = 10, $angle = 0, $color = '#00000000')
     {
         $this->tmpFile = sys_get_temp_dir() . '/' . uniqid() . '.png';
 
@@ -45,9 +45,8 @@ class TextWatermark implements Watermark
         $white = imagecolorallocatealpha($image, 255, 255, 255, 127);
         imagefill($image, 0, 0, $white);
 
-        $black = imagecolorallocatealpha($image, $colorArray['red'], $colorArray['green'], $colorArray['blue'], $colorArray['alpha']);
-        imagettftext($image, $size, $angle, $textBox['left'], $textBox['top'], $black, $font, $text);
-        imagefilter($image, IMG_FILTER_COLORIZE, 0, 0, 0, 127 * $opacity);
+        $textColor = imagecolorallocatealpha($image, $colorArray['red'], $colorArray['green'], $colorArray['blue'], $colorArray['alpha']);
+        imagettftext($image, $size, $angle, $textBox['left'], $textBox['top'], $textColor, $font, $text);
         imagepng($image, $this->tmpFile);
 
         imagedestroy($image);
