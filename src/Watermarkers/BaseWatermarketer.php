@@ -103,7 +103,7 @@ abstract class BaseWatermarketer
     public function pageRange($fromPage, $toPage = null)
     {
         $this->pageRangeFrom = (int)$fromPage;
-        $this->pageRangeFrom = (int)$toPage;
+        $this->pageRangeTo = (int)$toPage;
         return $this;
     }
 
