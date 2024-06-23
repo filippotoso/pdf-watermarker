@@ -162,7 +162,7 @@ abstract class BaseWatermarketer
 
         $watermarker = $this->watermarker();
 
-        if (class_exists(Illuminate\Http\Response::class)) {
+        if (class_exists(\Illuminate\Http\Response::class)) {
             return response()->streamDownload(function () use ($watermarker, $filename) {
                 echo ($watermarker->string());
             }, $filename, [

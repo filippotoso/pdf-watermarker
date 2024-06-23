@@ -54,7 +54,6 @@ class TextWatermark implements Watermark
 
     protected function textBox($rect)
     {
-
         $minX = min([$rect[0], $rect[2], $rect[4], $rect[6]]);
         $maxX = max([$rect[0], $rect[2], $rect[4], $rect[6]]);
         $minY = min([$rect[1], $rect[3], $rect[5], $rect[7]]);

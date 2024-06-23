@@ -10,6 +10,7 @@ use FilippoToso\PdfWatermarker\Support\Position;
 
 class PdfWatermarker implements Watermarker
 {
+    protected const DEFAULT_FILENAME = 'document.pdf';
     protected const DEFAULT_RESOLUTION = 96;
 
     protected $watermark;
@@ -210,23 +211,59 @@ class PdfWatermarker implements Watermarker
     }
 
     /**
-     * @param string $fileName
-     * @return void
+     * Return a Laravel response to stream the watermarked PDF
+     *
+     * @param string $filename
+     * @return Illuminate\Http\Response|self
      */
-    public function download($fileName = 'document.pdf')
+    public function stream($filename = null)
     {
-        $this->process();
-        $this->fpdi->Output($fileName, 'D');
+        return $this->response($filename, true);
     }
 
     /**
-     * @param string $fileName
-     * @return void
+     * Return a Laravel response to download the watermarked PDF
+     *
+     * @param string $filename
+     * @return Illuminate\Http\Response|self
      */
-    public function stream($fileName = 'document.pdf')
+    public function download($filename = null)
     {
+        return $this->response($filename, false);
+    }
+
+    /**
+     * Return a Laravel response to download the watermarked PDF
+     *
+     * @param string $filename
+     * @return Illuminate\Http\Response|self
+     */
+    protected function response($filename, $inline = true)
+    {
+        if ($filename) {
+            $filename = basename($filename);
+        } else {
+            $filename = static::DEFAULT_FILENAME;
+        }
+
         $this->process();
-        $this->fpdi->Output($fileName, 'I');
+
+        if (class_exists(\Illuminate\Http\Response::class)) {
+            return response()->streamDownload(function () use ($filename) {
+                echo ($this->string());
+            }, $filename, [
+                'Content-Type' => $inline ? 'application/pdf' : 'application/octet-stream',
+                'Cache-Control' => 'private, max-age=0, must-revalidate',
+                'Pragma' => 'public',
+            ], $inline ? 'inline' : 'attachment');
+        } else {
+            if ($inline) {
+                $this->fpdi->Output($filename, 'I');
+            } else {
+                $this->fpdi->Output($filename, 'D');
+            }
+            return $this;
+        }
     }
 
     /**
