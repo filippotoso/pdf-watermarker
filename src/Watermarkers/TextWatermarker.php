@@ -17,7 +17,6 @@ class TextWatermarker extends BaseWatermarketer
     protected $size = 10;
     protected $angle = 0;
     protected $color = '#00000000';
-    protected $opacity = 1;
 
     /**
      * Set the wtaermark text
@@ -68,7 +67,7 @@ class TextWatermarker extends BaseWatermarketer
     }
 
     /**
-     * Set the text color in #RRGGBBAA format
+     * Set the text color in #RRGGBBAA format where AA is the alpha channel 0 - 255 in hex
      *
      * @param string $color
      * @return TextWatermarker
@@ -76,18 +75,6 @@ class TextWatermarker extends BaseWatermarketer
     public function color($color)
     {
         $this->color = $color;
-        return $this;
-    }
-
-    /**
-     * Set the text opacity
-     *
-     * @param $opacity
-     * @return $this
-     */
-    public function opacity($opacity)
-    {
-        $this->opacity = $opacity;
         return $this;
     }
 
@@ -107,7 +94,7 @@ class TextWatermarker extends BaseWatermarketer
 
         $pdf = new Pdf($this->input);
 
-        $watermark = new TextWatermark($this->text, $this->font, $this->size, $this->angle, $this->color, $this->opacity);
+        $watermark = new TextWatermark($this->text, $this->font, $this->size, $this->angle, $this->color);
 
         $watermarker = new Watermarker($pdf, $watermark, $this->resolution);
 
