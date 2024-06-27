@@ -108,7 +108,7 @@ TextWatermarker::input('input.pdf')
     ->angle(25)
     ->font('arial.ttf')
     ->size('25')
-    ->color('#CC00007F')
+    ->color('#CC00007F') // 7F is the alpha channel (transparency or opacity of color) 0 - 255 in hex
     ->resolution(300) // 300 dpi
     ->save();
 ```
